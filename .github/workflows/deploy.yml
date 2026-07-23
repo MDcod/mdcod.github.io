@@ -41,6 +41,7 @@ jobs:
           mkdir -p dist
           cp currency-converter.html rustoeng.html dist/
           [ -d images ] && cp -r images dist/
+          [ -d week-plan ] && cp -r week-plan dist/
 
       - name: Show dist contents
         run: ls -R dist

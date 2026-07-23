@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Неделя: еда, ходьба, силовые — 84 → 78 кг</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Golos+Text:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E4E5DE;
+  --card:#F3F3EE;
+  --ink:#171A18;
+  --soft:#5C605B;
+  --pine:#1F5D4C;
+  --indigo:#2E3A8C;
+  --rule:rgba(23,26,24,.15);
+  --rail:#A7ABA2;
+  --maxw:920px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Golos Text","Segoe UI",system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.5;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px 80px}
+b,strong{font-weight:600}
+
+/* ---------- header ---------- */
+.masthead{padding:44px 0 28px;border-bottom:2px solid var(--ink)}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--soft);margin:0 0 14px
+}
+h1{
+  font-family:"Unbounded",sans-serif;font-weight:800;
+  font-size:clamp(30px,7vw,54px);line-height:1.02;letter-spacing:-.02em;
+  margin:0 0 16px;text-wrap:balance;
+}
+.lede{max-width:52ch;margin:0;color:var(--soft);font-size:15px}
+
+/* ---------- notice ---------- */
+.notice{
+  margin:18px 0 0;padding:12px 16px;border:1px solid var(--rule);border-left:3px solid var(--pine);
+  border-radius:3px;font-size:13.5px;color:var(--soft);background:var(--card)
+}
+.notice b{color:var(--ink)}
+.notice code{font-family:"IBM Plex Mono",monospace;font-size:.9em;color:var(--indigo)}
+
+/* ---------- budget band ---------- */
+.band{margin:0 0 8px;padding:26px 0 22px;border-bottom:1px solid var(--rule)}
+.band__title{
+  font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--soft);margin:0 0 18px
+}
+.macros{display:flex;flex-wrap:wrap;gap:0;margin:0;padding:0;list-style:none}
+.macros li{
+  flex:1 1 128px;padding:0 18px;border-left:1px solid var(--rule);
+}
+.macros li:first-child{padding-left:0;border-left:0}
+.macros .val{
+  display:block;font-family:"IBM Plex Mono",monospace;font-weight:500;
+  color:var(--indigo);font-size:clamp(20px,4.4vw,30px);letter-spacing:-.03em;
+  line-height:1.1;font-variant-numeric:tabular-nums
+}
+.macros .unit{font-size:.55em;color:var(--soft);letter-spacing:0}
+.macros .key{display:block;margin-top:6px;font-size:13px;color:var(--soft)}
+.band__note{margin:20px 0 0;font-size:13.5px;color:var(--soft);max-width:64ch}
+
+/* ---------- split meal budget ---------- */
+.split{padding:26px 0;border-bottom:2px solid var(--ink)}
+.split table{border-collapse:collapse;width:100%;max-width:520px}
+.split th,.split td{
+  text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--rule);
+  font-size:14.5px
+}
+.split th{
+  font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:11.5px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--soft)
+}
+.split td.n{
+  font-family:"IBM Plex Mono",monospace;color:var(--indigo);
+  font-variant-numeric:tabular-nums;white-space:nowrap
+}
+
+/* ---------- day tabs ---------- */
+.days{position:sticky;top:0;z-index:5;background:var(--paper);
+  padding:14px 0 12px;margin-bottom:6px;border-bottom:1px solid var(--rule)}
+.days__row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.days__row::-webkit-scrollbar{display:none}
+.tab{
+  flex:0 0 auto;appearance:none;cursor:pointer;
+  font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em;
+  text-transform:uppercase;
+  background:transparent;color:var(--soft);
+  border:1px solid var(--rule);border-radius:999px;
+  padding:8px 15px;transition:background .15s,color .15s,border-color .15s
+}
+.tab:hover{border-color:var(--ink);color:var(--ink)}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--card);border-color:var(--ink)}
+.tab .dot{display:inline-block;width:5px;height:5px;border-radius:50%;
+  background:var(--pine);margin-left:7px;vertical-align:middle}
+.tab[aria-selected="true"] .dot{background:#8FD9C2}
+
+/* ---------- day panel ---------- */
+.day{display:none;padding:22px 0 6px}
+.day.is-on{display:block;animation:rise .3s ease}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.day__head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.day__name{font-family:"Unbounded",sans-serif;font-weight:600;font-size:22px;margin:0;letter-spacing:-.01em}
+.badge{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;padding:4px 10px;border-radius:999px
+}
+.badge--train{background:var(--pine);color:#EAF3EF}
+.badge--walk{background:transparent;color:var(--soft);border:1px solid var(--rule)}
+
+.rail{list-style:none;margin:0;padding:0;position:relative}
+.rail::before{
+  content:"";position:absolute;left:53px;top:8px;bottom:8px;
+  width:1px;background:var(--rail)
+}
+.slot{position:relative;display:grid;grid-template-columns:54px 1fr;gap:0 22px;
+  padding:0 0 4px}
+.slot__time{
+  font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:500;
+  font-variant-numeric:tabular-nums;color:var(--ink);padding-top:14px;text-align:left
+}
+.slot__body{padding:12px 0 14px}
+.slot::after{
+  content:"";position:absolute;left:49px;top:19px;width:9px;height:9px;
+  border-radius:50%;background:var(--paper);border:1.5px solid var(--ink)
+}
+.slot__name{
+  font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--soft);margin:0 0 5px
+}
+.slot__items{margin:0;font-size:15.5px;line-height:1.45}
+.slot__items b{font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--indigo);
+  font-size:.92em;font-variant-numeric:tabular-nums}
+
+/* walk segment */
+.slot--walk .slot__time{color:var(--soft);font-size:12px;padding-top:8px}
+.slot--walk .slot__body{padding:6px 0 8px}
+.slot--walk::after{
+  left:50.5px;top:12px;width:0;height:auto;bottom:8px;border-radius:0;
+  border:0;border-left:2px dashed var(--rail);background:transparent
+}
+.walk{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13.5px;color:var(--soft)
+}
+.walk__mark{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;border:1px solid var(--rule);border-radius:999px;
+  padding:2px 9px
+}
+
+/* training slot */
+.slot--train .slot__body{
+  background:var(--pine);color:#EAF3EF;border-radius:3px;
+  padding:12px 16px;margin:6px 0 10px
+}
+.slot--train::after{background:var(--pine);border-color:var(--pine)}
+.slot--train .slot__name{color:#9FCFBD}
+.slot--train .slot__items{font-size:15px}
+.slot--train .slot__items b{color:#fff}
+
+/* ---------- sections ---------- */
+.section{padding:38px 0 0;border-top:2px solid var(--ink);margin-top:34px}
+h2{font-family:"Unbounded",sans-serif;font-weight:600;font-size:clamp(20px,4vw,26px);
+  margin:0 0 6px;letter-spacing:-.01em}
+.section__sub{margin:0 0 20px;color:var(--soft);font-size:14.5px;max-width:60ch}
+.swap{width:100%;border-collapse:collapse}
+.swap th{
+  text-align:left;font-family:"IBM Plex Mono",monospace;font-weight:500;
+  font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);
+  padding:0 14px 10px 0;border-bottom:1px solid var(--ink);vertical-align:bottom
+}
+.swap td{padding:11px 14px 11px 0;border-bottom:1px solid var(--rule);
+  font-size:14.5px;vertical-align:top}
+.swap td b{font-family:"IBM Plex Mono",monospace;font-weight:500;color:var(--indigo);
+  font-size:.92em;font-variant-numeric:tabular-nums}
+.rules{margin:22px 0 0;padding:0;list-style:none;max-width:64ch}
+.rules li{position:relative;padding-left:26px;margin-bottom:10px;font-size:14.5px;color:var(--soft)}
+.rules li::before{content:"—";position:absolute;left:0;color:var(--rail)}
+.rules b{color:var(--ink)}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--rule);
+  font-size:13px;color:var(--soft)}
+
+@media (max-width:560px){
+  .macros li{flex:1 1 44%;padding:0 12px 14px;border-left:0;
+    border-bottom:1px solid var(--rule)}
+  .macros li:first-child{padding-left:12px}
+  .rail::before{left:41px}
+  .slot{grid-template-columns:42px 1fr;gap:0 16px}
+  .slot::after{left:37px}
+  .slot--walk::after{left:38.5px}
+  .slot__items{font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+@media print{
+  .days,.notice{display:none}
+  .day{display:block!important;page-break-inside:avoid}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow" id="eyebrow"></p>
+    <h1 id="title"></h1>
+    <p class="lede" id="lede"></p>
+    <div id="notice"></div>
+  </header>
+
+  <!-- РАСПИСАНИЕ -->
+  <nav class="days" aria-label="Дни недели">
+    <div class="days__row" id="tabs" role="tablist"></div>
+  </nav>
+  <div id="daysHost"></div>
+
+  <!-- НОРМА -->
+  <section class="band">
+    <p class="band__title" id="normsTitle"></p>
+    <ul class="macros" id="macros"></ul>
+    <p class="band__note" id="normsNote"></p>
+  </section>
+
+  <!-- РАЗБИВКА ПО ПРИЁМАМ -->
+  <section class="split">
+    <table id="splitTable"></table>
+  </section>
+
+  <!-- ЗАМЕНЫ -->
+  <section class="section">
+    <h2 id="swapTitle"></h2>
+    <p class="section__sub" id="swapSub"></p>
+    <table class="swap" id="swapTable"></table>
+    <ul class="rules" id="rules"></ul>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<script>
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+
+  // **жирные цифры** -> <b>, всё остальное экранируется
+  function fmt(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+  }
+
+  function el(tag, cls, html){
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+
+  function showNotice(html){
+    $('notice').innerHTML = '<div class="notice">' + html + '</div>';
+  }
+
+  /* ---------- расписание ---------- */
+  function renderDays(days){
+    var tabs = $('tabs'), host = $('daysHost');
+    tabs.innerHTML = ''; host.innerHTML = '';
+
+    days.forEach(function(day){
+      var isTrain = (day.badge && day.badge.type === 'train');
+
+      var tab = el('button', 'tab', fmt(day.short) + (isTrain ? '<span class="dot"></span>' : ''));
+      tab.type = 'button';
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-selected', 'false');
+      tab.dataset.day = day.id;
+      tabs.appendChild(tab);
+
+      var sec = el('section', 'day');
+      sec.id = day.id;
+
+      var head = el('div', 'day__head');
+      head.appendChild(el('h3', 'day__name', fmt(day.name)));
+      if (day.badge) {
+        head.appendChild(el('span', 'badge badge--' + (day.badge.type || 'walk'), fmt(day.badge.text)));
+      }
+      sec.appendChild(head);
+
+      var rail = el('ul', 'rail');
+      (day.slots || []).forEach(function(slot){
+        var type = slot.type || 'meal';
+        var li = el('li', 'slot' + (type === 'meal' ? '' : ' slot--' + type));
+        li.appendChild(el('span', 'slot__time', fmt(slot.time)));
+
+        var body = el('div', 'slot__body');
+        if (type === 'walk') {
+          body.innerHTML = '<span class="walk"><span class="walk__mark">' +
+            fmt(slot.mark || '10 мин') + '</span> ' + fmt(slot.text) + '</span>';
+        } else {
+          if (slot.name) body.appendChild(el('p', 'slot__name', fmt(slot.name)));
+          body.appendChild(el('p', 'slot__items', fmt(slot.text)));
+        }
+        li.appendChild(body);
+        rail.appendChild(li);
+      });
+      sec.appendChild(rail);
+      host.appendChild(sec);
+    });
+
+    function show(id){
+      Array.prototype.forEach.call(host.querySelectorAll('.day'), function(d){
+        d.classList.toggle('is-on', d.id === id);
+      });
+      Array.prototype.forEach.call(tabs.querySelectorAll('.tab'), function(t){
+        t.setAttribute('aria-selected', t.dataset.day === id ? 'true' : 'false');
+      });
+    }
+
+    tabs.addEventListener('click', function(e){
+      var t = e.target.closest('.tab');
+      if (t) show(t.dataset.day);
+    });
+
+    // открываем на сегодняшнем дне; если его нет в JSON — на первом
+    var todayIndex = (new Date().getDay() + 6) % 7; // 0 = понедельник
+    var today = days[todayIndex] || days[0];
+    show(today.id);
+  }
+
+  /* ---------- остальные блоки ---------- */
+  function renderNorms(n){
+    if (!n) return;
+    $('normsTitle').textContent = n.title || '';
+    $('normsNote').textContent = n.note || '';
+    var ul = $('macros'); ul.innerHTML = '';
+    (n.items || []).forEach(function(it){
+      ul.appendChild(el('li', null,
+        '<span class="val">' + fmt(it.value) +
+        (it.unit ? '<span class="unit">' + fmt(it.unit) + '</span>' : '') +
+        '</span><span class="key">' + fmt(it.key) + '</span>'));
+    });
+  }
+
+  function renderSplit(s){
+    if (!s) return;
+    var t = $('splitTable');
+    var head = '<thead><tr>' + (s.head || []).map(function(h){
+      return '<th>' + fmt(h) + '</th>';
+    }).join('') + '</tr></thead>';
+    var body = '<tbody>' + (s.rows || []).map(function(r){
+      return '<tr>' + r.map(function(c, i){
+        return '<td' + (i ? ' class="n"' : '') + '>' + fmt(c) + '</td>';
+      }).join('') + '</tr>';
+    }).join('') + '</tbody>';
+    t.innerHTML = head + body;
+  }
+
+  function renderSwap(s, rules){
+    if (s) {
+      $('swapTitle').textContent = s.title || '';
+      $('swapSub').textContent = s.sub || '';
+      var t = $('swapTable');
+      t.innerHTML = '<thead><tr>' + (s.head || []).map(function(h){
+        return '<th>' + fmt(h) + '</th>';
+      }).join('') + '</tr></thead><tbody>' + (s.rows || []).map(function(r){
+        return '<tr>' + r.map(function(c){ return '<td>' + fmt(c) + '</td>'; }).join('') + '</tr>';
+      }).join('') + '</tbody>';
+    }
+    var ul = $('rules'); ul.innerHTML = '';
+    (rules || []).forEach(function(r){ ul.appendChild(el('li', null, fmt(r))); });
+  }
+
+  function render(data){
+    var m = data.meta || {};
+    $('eyebrow').textContent = m.eyebrow || '';
+    $('title').innerHTML = m.title || '';
+    $('lede').textContent = m.lede || '';
+    $('footer').textContent = m.footer || '';
+    renderDays(data.days || []);
+    renderNorms(data.norms);
+    renderSplit(data.mealSplit);
+    renderSwap(data.swap, data.rules);
+  }
+
+  fetch('plan.json', { cache: 'no-store' })
+    .then(function(r){
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(render)
+    .catch(function(err){
+      showNotice('Не удалось загрузить <code>plan.json</code> (' + fmt(err.message) + '). Проверь, что файл лежит рядом со страницей.');
+    });
+})();
+</script>
+</body>
+</html>
